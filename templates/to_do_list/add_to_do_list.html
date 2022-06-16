@@ -1,0 +1,113 @@
+{% extends 'to_do_list/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+
+    <section class="section register  d-flex flex-column align-items-center justify-content-center py-4">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+            <div class="d-flex justify-content-center py-4">
+              <a href="index.html" class="logo d-flex align-items-center w-auto">
+                <img src="{% static 'assets/img/logo.png' %}" alt="">
+                <span class="d-none d-lg-block">To Do List</span>
+              </a>
+            </div><!-- End Logo -->
+
+            <div class="card ">
+
+              <div class="card-body">
+
+                <div class="pt-4 pb-2">
+                  <h5 class="card-title text-center pb-0 fs-4">Add New</h5>
+                  
+                </div>
+
+                <form class="row g-3 needs-validation"  method="post" >
+                    {% csrf_token %}
+                  <div class="col-12">
+                    <label for="yourName" class="form-label">Title</label>
+                    <input type="text"  name="title" class="form-control" id="yourName" required>
+                    <div class="invalid-feedback">Please, enter  title!</div>
+                  </div>
+
+                  <div class="col-12">
+                    <label for="yourName" class="form-label">Discription</label>
+                    <input type="text"  name="description" class="form-control" id="yourName" required>
+                    <div class="invalid-feedback">Please, enter  discription!</div>
+                  </div>
+
+                  <div class="col-12">
+                    <label for="yourName" class="form-label">Category</label>
+                    <select name="category"  class="form-control">
+                        {% for cat in category %}
+                        <option value="{{cat.id}}" >
+                            {{cat.label}}
+                        </option>
+                        {%endfor%}
+                    </select>
+                    <div class="invalid-feedback">Please, enter category!</div>
+                  </div>
+                  <div class="col-12">
+                    <label for="yourUsername" class="form-label">User</label>
+                    <div class="input-group has-validation">
+                      <span class="input-group-text" id="inputGroupPrepend">@</span>
+                      <select name="user"  class="form-control">
+                        {% for usr in user %}
+                        <option value="{{usr.id}}" >
+                            {{usr.email}}
+                        </option>
+                        {%endfor%}
+                    </select>
+                      <div class="invalid-feedback">Please choose email.</div>
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <label for="yourPassword" class="form-label">Date</label>
+                    
+                    <input class="form-control" name="date" id="starttime"
+                                               type="date"  placeholder="12:00:00"
+                                               value="{{todolist.date|date:'Y-m-d'}}" />
+                    <div class="invalid-feedback">Please enter date!</div>
+                  </div>
+
+                  <div class="col-12">
+                    <Label>Status</Label>
+                    <select name="status"  class="form-control">
+                        {% for stus in status %}
+                        <option value="{{stus.id}}" >
+                            {{stus.label}}
+                        </option>
+                        {%endfor%}
+                    </select>
+                  </div>
+                  
+                  <div class="col-12">
+                    <button class="btn btn-primary w-100" type="submit">Add</button>
+                  </div>
+                  <div class="col-12">
+                    
+                  </div>
+                </form>
+
+              </div>
+            </div>
+
+            <div class="credits">
+              <!-- All the links in the footer should remain intact. -->
+              <!-- You can delete the links only if you purchased the pro version. -->
+              <!-- Licensing information: https://bootstrapmade.com/license/ -->
+              <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+              <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+{% endblock%}

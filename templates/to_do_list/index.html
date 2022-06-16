@@ -1,0 +1,120 @@
+{% extends 'to_do_list/base.html' %}
+{% block content %}
+<div class="pagetitle">
+    <h1>Dashboard</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item active">To Do List</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+
+  <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">List </h5>
+              <div>
+              <a href="/addlist/"> Add New To Do List</a>
+            </div>
+              <!-- Table with stripped rows -->
+              <table class="table datatable">
+                <thead>
+                  <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Discription</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">User</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Update</th>
+                    <th scope="col">Delete</th>
+                    
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for todo in todolist %}
+                  <tr>
+                    <td>{{todo.title}}</td>
+                    <td>{{todo.description}}</td>
+                    <td>{{todo.category}}</td>
+                    <td>{{todo.user}}</td>
+                    <td>{{todo.date}}</td>
+                    <td>{{todo.status}}</td>
+                    <th scope="col">
+                        <a href="/updatetodo/{{todo.id}}/" style="color:blue ;">Update&View</a>
+                    </th>
+                    <td>
+                      <div class="card-footer text-center py-3">
+                          <!-- <form action="deletedodo/{{todo.id}}" role="form" method="post">
+                              {% csrf_token %} -->
+                              <a href="#test{{todo.id}}" style="color:red ;" class=" "
+                                  data-bs-toggle="modal" data-bs-target="#test{{todo.id}}">Delete</a>
+                              <!-- </form> -->
+                      </div>
+                  </td>
+                  <!-- delete user -->
+                  <div class="modal fade" id="test{{todo.id}}" role="dialog" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+
+                                        <h3>Are you sure{{todo.id}}</h3>
+
+                                        <div class="modal-body">
+                                            <div class="m-2 p-2">
+                                                <div class="container">
+                                                    <form action="/delete/{{todo.id}}" method="POST">
+                                                        {%csrf_token%}
+                                                        <div class="form-group">
+                                                        </div>
+                                                        <div class="container" style="text-align: right;">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal"> Cancel</button>
+                                                            <input type="submit" class="btn btn-danger"
+                                                                value="delete">
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                  <!-- end -->
+                  {% endfor %}
+                  
+                </tbody>
+              </table>
+              <!-- End Table with stripped rows -->
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <script>
+    //     $(document).ready(function () {
+    //     $(".delete").on("submit", function (event) {
+    //         console.log("call")
+    //         // event.preventDefault();
+    //         // console.log("rin")
+    //         // result = confirm("Confirm Deletion?");
+    //         // if (result) {
+    //         //     $(this).unbind('submit');
+    //         //     $(this).removeClass("delete");
+    //         //     $(this).submit();
+    //         // }
+    //     });
+    // });
+    </script>
+    {% endblock%}
+    
